@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="club.pinea.dao.ShareFileMapper" >
+  <resultMap id="BaseResultMap" type="club.pinea.model.ShareFile" >
+    <result column="sharFileId" property="sharfileid" jdbcType="VARCHAR" />
+    <result column="fileId" property="fileid" jdbcType="INTEGER" />
+  </resultMap>
+  <insert id="insert" parameterType="club.pinea.model.ShareFile" >
+    insert into sharefile (sharFileId, fileId)
+    values (#{sharfileid,jdbcType=VARCHAR}, #{fileid,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="club.pinea.model.ShareFile" >
+    insert into sharefile
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="sharfileid != null" >
+        sharFileId,
+      </if>
+      <if test="fileid != null" >
+        fileId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="sharfileid != null" >
+        #{sharfileid,jdbcType=VARCHAR},
+      </if>
+      <if test="fileid != null" >
+        #{fileid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+</mapper>

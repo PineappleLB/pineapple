@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>注册</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no,maximum-scale=1.0, minimum-scale=1.0" />
+		<link rel="stylesheet" href="static/css/bootstrap.css" />
+		
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			.bg_div{
+				width:100%;
+				height:100%;
+				/*height: 2000px;*/
+				background:url(static/img/bg.jpg) no-repeat fixed;
+				background-size: 100% 100%;
+				padding-top: 5%;
+				min-width:1300px;
+			}
+			article{
+				width:40%;
+				height:auto;
+				margin: 0 auto;
+				background-color: white;
+				padding-top: 2%;
+				min-width: 480px;
+			}
+			span{
+				width:100%;
+				height: 100px;
+				display: block;
+				background-color: #5BC0DE;
+				font:normal normal 30px/100px "courier new" ;
+				text-align: center;
+				color: whitesmoke;
+				letter-spacing: 10px;
+				min-width:300px;
+			}
+			p{
+				margin:15px 0px;
+			}
+			form input{
+				width:320px;
+				height: 50px;
+				border-radius: 3px;
+				border:#AAAABC 1px solid !important;
+				font-size: 16px;
+			}
+			input[type="radio"]{
+				width:18px;
+				height: 18px;
+			}
+			.radio_male,.radio_female{
+				width:18px;
+				height: 18px;
+				margin:0 25px;
+				line-height: 18px;
+				font-size: 20px;
+			}
+			section{
+			    width: 67%;
+			    height: auto;
+			    margin: 2.5em auto;
+			}
+			@media (max-width: 768px) {
+				.bg_div{
+					padding-top: 10%;
+					min-width:100%;
+				    z-index: -1;
+				}
+				article{
+					width:100%;
+					min-width:0;
+				}
+				form input{
+					width:270px;
+				}
+				section{
+					width:40%;
+					min-width:275px;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<div class="bg_div">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+						<article>
+							<span>欢迎加入我们！</span>
+							<section>
+								<form action="#" method="post">
+									<p>用户名</p><input type="text" placeholder="请输入用户名"/><br />
+									<p>手机号</p><input type="tel" /><br />
+									<p>密码 <p><input type="password" required /><br />
+									<p>确认密码</p><input type="password" required /><br />
+									<p>邮箱</p><input type="email"/><br />
+									<p>性别</p>男<input type="radio" name="radios" class="radio_male"/>
+									女<input type="radio" name="radios" class="radio_female" /><br />
+									<p>验证码</p><input type="text"/><br /><p>&nbsp;</p>
+									<input type="submit" value="提交" class="btn-info"/>
+								</form>
+							</section>
+						</article>
+						<footer>
+							<b>Copyright&copy; 2018 All Rights Reserved</b>
+						</footer>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
