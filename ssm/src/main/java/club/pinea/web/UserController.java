@@ -22,7 +22,7 @@ import club.pinea.utils.IndustrySMS;
 import club.pinea.utils.StringUtils;
 import club.pinea.utils.VerifyCode;
 
-@CrossOrigin(origins="*", maxAge=3600)
+@CrossOrigin(origins="*", maxAge=3600, methods = {RequestMethod.GET,RequestMethod.POST})
 @Controller
 @RequestMapping("/user")
 public class UserController {
@@ -70,7 +70,7 @@ public class UserController {
 	 * @param resp
 	 * @throws IOException
 	 */
-	@RequestMapping(value="/image")
+	@RequestMapping(value="/image", method=RequestMethod.GET)
 	public void imageVCode(@RequestParam("random")String random,HttpSession session,HttpServletResponse resp) throws IOException {
 		VerifyCode code = new VerifyCode();
 		VerifyCode.output(code.getImage(), resp.getOutputStream());
@@ -216,6 +216,7 @@ public class UserController {
 	 * @param pass
 	 * @param writer
 	 */
+	@RequestMapping(value="/updPass", method=RequestMethod.POST)
 	public void updatePassWord(User u, @RequestParam("vcode")String vcode, @RequestParam("pcode")String pcode,
 			@RequestParam("random")String random, PrintWriter writer) {
 		if(dao.selectPCode(random).equalsIgnoreCase(pcode)) {
