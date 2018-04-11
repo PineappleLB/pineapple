@@ -12,6 +12,8 @@ import com.alibaba.fastjson.JSONObject;
 import club.pinea.model.User;
 import club.pinea.redis.UserDaoR;
 import club.pinea.service.IUserService;
+import club.pinea.utils.RedisCallback;
+import club.pinea.utils.RedisTemplate;
 import club.pinea.utils.VerifyCode;
 import redis.clients.jedis.Jedis;
 
@@ -29,6 +31,8 @@ public class Test {
 	@Autowired
 	private IUserService service;
 	
+	@Autowired
+	private RedisTemplate redisClusterTemplate;
 	
 	@Autowired
 	private UserDaoR dao;
@@ -54,13 +58,10 @@ public class Test {
 	
 	@org.junit.Test
 	public void test3() {
-		/*User u = dao.selectUserById(1);
-		System.out.println(JSONObject.toJSONString(u));*/
-//		IndustrySMS.execute("15982466924", "123456");
-		Jedis jedis = new Jedis();
-		String str = jedis.setex("123",30 , "123");
-		System.out.println(str.equals("OK"));
-		jedis.close();
+		String result = redisClusterTemplate.execute((jedis) -> {
+				return jedis.set("123", "123");
+		});
+		System.out.println(result + "test------------------------");
 	}
 	
 }

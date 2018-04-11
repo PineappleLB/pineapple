@@ -12,7 +12,8 @@
     http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
 
 	<!-- 扫描controller（controller层注入） -->
-	<context:component-scan base-package="club.pinea.web" use-default-filters="false">
+	<context:component-scan base-package="club.pinea.web"
+		use-default-filters="false">
 		<context:include-filter type="annotation"
 			expression="org.springframework.stereotype.Controller" />
 	</context:component-scan>
@@ -47,7 +48,7 @@
 	<mvc:default-servlet-handler />
 	<!-- 静态资源映射 -->
 	<mvc:resources mapping="/static/**" location="/WEB-INF/static/" />
-	
+
 
 	<!-- 对模型视图添加前后缀 -->
 	<bean id="viewResolver"
