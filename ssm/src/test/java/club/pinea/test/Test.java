@@ -1,6 +1,8 @@
 package club.pinea.test;
 
 import java.security.NoSuchAlgorithmException;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,10 +14,9 @@ import com.alibaba.fastjson.JSONObject;
 import club.pinea.model.User;
 import club.pinea.redis.UserDaoR;
 import club.pinea.service.IUserService;
-import club.pinea.utils.RedisCallback;
-import club.pinea.utils.RedisTemplate;
 import club.pinea.utils.VerifyCode;
-import redis.clients.jedis.Jedis;
+import redis.clients.jedis.HostAndPort;
+import redis.clients.jedis.JedisCluster;
 
 /**
  * @author 作者 pineapple 
@@ -31,8 +32,8 @@ public class Test {
 	@Autowired
 	private IUserService service;
 	
-	@Autowired
-	private RedisTemplate redisClusterTemplate;
+	@Autowired  
+    private JedisCluster jedisCluster; 
 	
 	@Autowired
 	private UserDaoR dao;
@@ -58,10 +59,24 @@ public class Test {
 	
 	@org.junit.Test
 	public void test3() {
-		String result = redisClusterTemplate.execute((jedis) -> {
-				return jedis.set("123", "123");
-		});
-		System.out.println(result + "test------------------------");
+//		String result = redisClusterTemplate.execute((jedis) -> {
+//				return jedis.set("123", "123");
+//		});
+//		System.out.println(result + "test------------------------");
+		String str = jedisCluster.get("aa");
+		System.out.println(str);
+		str = jedisCluster.set("hello", "123");
+		System.out.println(str);
+//		Set<HostAndPort> set = new HashSet<>();
+//		set.add(new HostAndPort("127.0.0.1", 6379));
+//		set.add(new HostAndPort("127.0.0.1", 6380));
+//		set.add(new HostAndPort("127.0.0.1", 6381));
+//		set.add(new HostAndPort("127.0.0.1", 6382));
+//		set.add(new HostAndPort("127.0.0.1", 6383));
+//		set.add(new HostAndPort("127.0.0.1", 6384));
+//		JedisCluster cluster = new JedisCluster(set);
+//		String str = cluster.set("hello", "123");
+//		System.out.println(str);
 	}
 	
 }

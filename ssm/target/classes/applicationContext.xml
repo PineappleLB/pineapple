@@ -35,23 +35,23 @@
 
 	<!-- redis config start -->
 	<!-- 配置JedisPoolConfig实例 -->
-	<bean id="poolConfig" class="redis.clients.jedis.JedisPoolConfig">
+	<!-- <bean id="poolConfig" class="redis.clients.jedis.JedisPoolConfig">
 		<property name="maxIdle" value="${redis.maxIdle}" />
 		<property name="maxTotal" value="${redis.maxActive}" />
 		<property name="maxWaitMillis" value="${redis.maxWait}" />
 		<property name="testOnBorrow" value="${redis.testOnBorrow}" />
-	</bean>
+	</bean> -->
 
-	<bean id="jedisPool" class="redis.clients.jedis.JedisPool">
+	<!-- <bean id="jedisPool" class="redis.clients.jedis.JedisPool">
 		<constructor-arg ref="poolConfig"/>
 		<constructor-arg name="host" value="${redis.host}"/>
 		<constructor-arg name="port" value="${redis.port}"/>
-	</bean>
+	</bean> -->
 
 	<!-- 配置RedisTemplate -->
-	<bean id="redisTemplate" class="club.pinea.utils.RedisTemplate">
+	<!-- <bean id="redisTemplate" class="club.pinea.utils.RedisTemplate">
 		<property name="jedisPool" ref="jedisPool" />
-	</bean>
+	</bean> -->
 	
 
 	<!-- 配置JedisConnectionFactory -->
