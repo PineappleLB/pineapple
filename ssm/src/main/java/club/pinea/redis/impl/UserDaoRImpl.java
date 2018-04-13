@@ -8,7 +8,7 @@ import com.alibaba.fastjson.JSONObject;
 import club.pinea.SMS.Config;
 import club.pinea.model.User;
 import club.pinea.redis.UserDaoR;
-import club.pinea.utils.RedisTemplate;
+import redis.clients.jedis.JedisCluster;
 
 /**
  * @author 作者 pineapple 
@@ -20,69 +20,50 @@ import club.pinea.utils.RedisTemplate;
 public class UserDaoRImpl implements UserDaoR {
 
 	@Autowired
-	private RedisTemplate jedis;
+	private JedisCluster jedisCluster;
 	
 	@Override
 	public void saveUser(User u) {
 		//15分钟过期
-		jedis.update((jedis)->{
-//			jedis.opsForValue().set(u.getId()+"", JSONObject.toJSONString(u),900,TimeUnit.SECONDS);
-			jedis.setex("user"+u.getId(), Config.TIME_OUT * 60, JSONObject.toJSONString(u));
-		});
+		jedisCluster.setex("USER" + u.getId(), Config.TIME_OUT * 60, JSONObject.toJSONString(u));
 	}
 	
 	@Override
 	public User selectUserById(int id) {
-		String str = jedis.execute((jedis) -> {
-			return jedis.get("user"+id);
-		});
+		String str = jedisCluster.get("USER" + id);
 		User u = JSONObject.parseObject(str, User.class);
 		return u;
 	}
 
 	@Override
 	public int savePCode(String random, String code) {
-		return jedis.execute((jedis) -> {
-			return jedis.setex("pcode"+random, Config.TIME_OUT * 60, code).equals("OK")?1:0;
-		});
+		return jedisCluster.setex("P_CODE" + random, Config.TIME_OUT * 60, code).equals("OK")?1:0;
 	}
 
 	@Override
 	public void saveVCode(String random, String text) {
-		jedis.update((jedis)->{
-			jedis.setex("vcode"+random, Config.TIME_OUT * 60, text);
-		});
-		
+		jedisCluster.setex("V_CODE"+random, Config.TIME_OUT * 60, text);
 	}
 
 	@Override
 	public String selectVCode(String random) {
-		return jedis.execute((jedis) -> {
-			return jedis.get("vcode"+random);
-		});
+		return jedisCluster.get("V_CODE"+random);
 	}
 
 	@Override
 	public String selectPCode(String random) {
-		return jedis.execute((jedis) -> {
-				return jedis.get("pcode"+random);
-			});
+		return jedisCluster.get("P_CODE"+random);
 	}
 
 	@Override
 	public void deletePCode(String random) {
-		jedis.update((jedis)->{
-			jedis.del("pcode"+random);
-		});
+		jedisCluster.del("P_CODE"+random);
 		
 	}
 
 	@Override
 	public void deleteVCode(String random) {
-		jedis.update((jedis) -> {
-			jedis.del("vcode"+random);
-		});
-		
+		jedisCluster.del("V_CODE"+random);
 	}
 	
 }

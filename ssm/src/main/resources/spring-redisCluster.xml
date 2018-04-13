@@ -39,7 +39,7 @@
 	                <constructor-arg name="port" value="${redis.port6}"/>
             	</bean> 
             </set>  
-        </constructor-arg>  
+        </constructor-arg> 
         <constructor-arg name="poolConfig" ref="jedisPoolConfig"/>  
     </bean>
     <!-- 连接池配置 -->  
