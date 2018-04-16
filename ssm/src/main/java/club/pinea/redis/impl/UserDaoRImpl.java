@@ -37,33 +37,45 @@ public class UserDaoRImpl implements UserDaoR {
 
 	@Override
 	public int savePCode(String random, String code) {
-		return jedisCluster.setex("P_CODE" + random, Config.TIME_OUT * 60, code).equals("OK")?1:0;
+		String key = ("P_CODE"+random).replace(".", "");
+		System.out.println(key);
+		return jedisCluster.setex(key, Config.TIME_OUT * 60, code).equals("OK")?1:0;
 	}
 
 	@Override
 	public void saveVCode(String random, String text) {
-		jedisCluster.setex("V_CODE"+random, Config.TIME_OUT * 60, text);
+		String key = ("V_CODE"+random).replace(".", "");
+		System.out.println(key);
+		jedisCluster.set(key/*, Config.TIME_OUT * 60*/, text);
 	}
 
 	@Override
 	public String selectVCode(String random) {
-		return jedisCluster.get("V_CODE"+random);
+		String key = ("V_CODE"+random).replace(".", "");
+		System.out.println(key);
+		return jedisCluster.get(key);
 	}
 
 	@Override
 	public String selectPCode(String random) {
-		return jedisCluster.get("P_CODE"+random);
+		String key = ("P_CODE"+random).replace(".", "");
+		System.out.println(key);
+		return jedisCluster.get(key);
 	}
 
 	@Override
 	public void deletePCode(String random) {
-		jedisCluster.del("P_CODE"+random);
+		String key = ("P_CODE"+random).replace(".", "");
+		System.out.println(key);
+		jedisCluster.del(key);
 		
 	}
 
 	@Override
 	public void deleteVCode(String random) {
-		jedisCluster.del("V_CODE"+random);
+		String key = ("V_CODE"+random).replace(".", "");
+		System.out.println(key);
+		jedisCluster.del(key);
 	}
 	
 }

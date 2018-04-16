@@ -55,6 +55,16 @@ public class IUserServiceImpl  implements IUserService{
 
 	@Override
 	public int updateUserPassword(User u) {
+		String name = u.getUsername();
+		if(name.matches("^(\\w)+(\\.\\w+)*@(\\w)+((\\.\\w+)+)$")) {
+			//邮箱登录
+			User tempU = selectUserByEmail(name);
+			u.setUsername(tempU.getUsername());
+		}else if(name.matches("1(3|5|7|8)[0-9]{9}")) {
+			//手机号登录
+			User tempU = selectUserByPhone(name);
+			u.setUsername(tempU.getUsername());
+		}
 		return mapper.updateUserPassword(u);
 	}
 

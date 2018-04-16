@@ -12,7 +12,7 @@
    						http://www.springframework.org/schema/context/spring-context-4.0.xsd">
 	<!-- 集群配置 -->  
     <bean id="jedisCluster" class="redis.clients.jedis.JedisCluster">  
-        <constructor-arg>  
+        <constructor-arg>
             <set> 
                 <bean class="redis.clients.jedis.HostAndPort">  
 	                <constructor-arg name="host" value="${redis.host}"/>
@@ -41,6 +41,8 @@
             </set>  
         </constructor-arg> 
         <constructor-arg name="poolConfig" ref="jedisPoolConfig"/>  
+        <constructor-arg name = "timeout" value="${jedis.timeOut}"/>
+        <constructor-arg name = "maxRedirections" value = "${jedis.maxRedirections}"/>
     </bean>
     <!-- 连接池配置 -->  
     <bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">  

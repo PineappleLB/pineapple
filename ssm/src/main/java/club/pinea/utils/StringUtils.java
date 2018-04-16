@@ -11,6 +11,7 @@ import sun.misc.BASE64Encoder;
  * @version 创建时间：2018年2月15日 上午10:32:45
  * @description 类说明
  */
+@SuppressWarnings("restriction")
 public class StringUtils {
 
 	/**

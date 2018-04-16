@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.security.NoSuchAlgorithmException;
 import java.util.UUID;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import club.pinea.model.User;
 import club.pinea.redis.UserDaoR;
@@ -23,6 +25,7 @@ import club.pinea.utils.StringUtils;
 import club.pinea.utils.VerifyCode;
 
 @CrossOrigin(origins="*", maxAge=3600, methods = {RequestMethod.GET,RequestMethod.POST})
+@RestController
 @Controller
 @RequestMapping("/user")
 public class UserController {
@@ -43,7 +46,12 @@ public class UserController {
 	 */
 	@RequestMapping(value="/login",method=RequestMethod.POST)
 	public void userLogin(@RequestParam("name")String name,@RequestParam("pass")String pass,
-			HttpSession session,PrintWriter writer) throws NoSuchAlgorithmException {
+			HttpServletResponse resp,PrintWriter writer) throws NoSuchAlgorithmException {
+		resp.setHeader("Access-Control-Allow-Origin","*");
+		resp.setHeader("Access-Control-Allow-Methods","POST");
+		resp.setHeader("Access-Control-Allow-Headers","Access-Control");
+		resp.setHeader("Access-Control-Allow-Credentials","true");
+		resp.setHeader("Allow","POST");
 		User u = null;
 		if(name.matches("^(\\w)+(\\.\\w+)*@(\\w)+((\\.\\w+)+)$")) {
 			//邮箱登录
@@ -56,11 +64,15 @@ public class UserController {
 			u = userService.selectUserByName(name);
 		}
 		if(u != null && u.getPassword().equals(StringUtils.encode(pass+u.getToken()))) {
-			session.setAttribute("user", u);
+//			session.setAttribute("user", u);
+			Cookie cookie = new Cookie("club.pinea_USER", "123");
+			cookie.setMaxAge(600);
+			cookie.setPath("/");
+			resp.addCookie(cookie);
 			dao.saveUser(u);
-			writer.write("success");
+			writer.write("1");
 		}else {
-			writer.write("error");
+			writer.write("0");
 		}
 	}
 	
@@ -137,6 +149,7 @@ public class UserController {
 		System.out.println(phone);
 		String code = UUID.randomUUID().toString().
 				replace("-", "").substring(0, 6);
+		System.out.println(code);
 		try {
 			IndustrySMS.execute(phone, code);
 			writer.print(dao.savePCode(random, code));//将验证码存储到redis缓存当中
@@ -219,14 +232,20 @@ public class UserController {
 	@RequestMapping(value="/updPass", method=RequestMethod.POST)
 	public void updatePassWord(User u, @RequestParam("vcode")String vcode, @RequestParam("pcode")String pcode,
 			@RequestParam("random")String random, PrintWriter writer) {
-		if(dao.selectPCode(random).equalsIgnoreCase(pcode)) {
+		if(pcode != null && pcode.equalsIgnoreCase(dao.selectPCode(random))) {
 			dao.deletePCode(random);
-			if(dao.selectVCode(random).equals(vcode)) {
+			if(vcode != null && vcode.equals(dao.selectVCode(random))) {
 				dao.deleteVCode(random);
 				if(userService.updateUserPassword(u) > 0) {
-					
+					writer.write("1");
+				} else {
+					writer.write(0);
 				}
+			} else {
+				writer.write(0);
 			}
+		} else {
+			writer.write(0);
 		}
 	}
 	
@@ -242,7 +261,7 @@ public class UserController {
 			@RequestParam("random")String random, PrintWriter writer) {
 		String reVCode = dao.selectPCode(random);
 		if(pcode.equals(reVCode)) {
-			writer.write(1);
+			writer.write("1");
 		}else {
 			writer.write(0);
 		}
