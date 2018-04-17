@@ -40,16 +40,30 @@ public interface UserDaoR {
 	void saveVCode(String random, String text);
 
 	/**
-	 * 查询redis中的验证码信息
+	 * 查询redis中的图片验证码信息
 	 * @param random
 	 * @return
 	 */
 	String selectVCode(String random);
 
+	/**
+	 * 查询手机验证码
+	 * @param random
+	 * @return
+	 */
 	String selectPCode(String random);
 
+	/**
+	 * 删除手机验证码缓存
+	 * @param random
+	 */
 	void deletePCode(String random);
 
+	/**
+	 * 删除图片验证码缓存
+	 * @param random
+	 */
 	void deleteVCode(String random);
+	
 	
 }

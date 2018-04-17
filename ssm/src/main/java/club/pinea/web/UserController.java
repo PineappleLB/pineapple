@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import club.pinea.SMS.Config;
 import club.pinea.model.User;
 import club.pinea.redis.UserDaoR;
 import club.pinea.service.IUserService;
@@ -47,11 +48,6 @@ public class UserController {
 	@RequestMapping(value="/login",method=RequestMethod.POST)
 	public void userLogin(@RequestParam("name")String name,@RequestParam("pass")String pass,
 			HttpServletResponse resp,PrintWriter writer) throws NoSuchAlgorithmException {
-		resp.setHeader("Access-Control-Allow-Origin","*");
-		resp.setHeader("Access-Control-Allow-Methods","POST");
-		resp.setHeader("Access-Control-Allow-Headers","Access-Control");
-		resp.setHeader("Access-Control-Allow-Credentials","true");
-		resp.setHeader("Allow","POST");
 		User u = null;
 		if(name.matches("^(\\w)+(\\.\\w+)*@(\\w)+((\\.\\w+)+)$")) {
 			//邮箱登录
@@ -64,14 +60,29 @@ public class UserController {
 			u = userService.selectUserByName(name);
 		}
 		if(u != null && u.getPassword().equals(StringUtils.encode(pass+u.getToken()))) {
-//			session.setAttribute("user", u);
-			Cookie cookie = new Cookie("club.pinea_USER", "123");
+			//TODO cookie内容需要填充
+			Cookie cookie = new Cookie(Config.LOGIN_USER_INFO_KEY_PREV, "123");
 			cookie.setMaxAge(600);
 			cookie.setPath("/");
 			resp.addCookie(cookie);
 			dao.saveUser(u);
 			writer.write("1");
 		}else {
+			writer.write("0");
+		}
+	}
+	
+	@RequestMapping(value="/phoneLogin", method=RequestMethod.POST)
+	public void phoneLogin(@RequestParam("phone")String phone,@RequestParam("vcode")String vcode,
+			@RequestParam("pcode")String pcode, @RequestParam("random")String random,
+			HttpServletResponse resp,PrintWriter writer) {
+		if(vcode != null && vcode.equalsIgnoreCase(dao.selectVCode(random))) {
+			if(pcode != null && pcode.equalsIgnoreCase(dao.selectPCode(random))) {
+				writer.write("1");
+			} else {
+				writer.write("0");
+			}
+		} else {
 			writer.write("0");
 		}
 	}
@@ -86,9 +97,7 @@ public class UserController {
 	public void imageVCode(@RequestParam("random")String random,HttpSession session,HttpServletResponse resp) throws IOException {
 		VerifyCode code = new VerifyCode();
 		VerifyCode.output(code.getImage(), resp.getOutputStream());
-		System.out.println(code.getText());
 		dao.saveVCode(random,code.getText());
-//		session.setAttribute("vcode", code.getText());
 	}
 	
 	
@@ -102,14 +111,13 @@ public class UserController {
 	public void validateVCode(@RequestParam(value="vcode")String vcode,
 			@RequestParam("random")String random,PrintWriter writer) {
 		String valVCode = dao.selectVCode(random);
-//		System.out.println("val="+valVCode+",code="+vcode+",bool="+vcode.equalsIgnoreCase(valVCode));
-		int result = 0;
+		String result ="0";
 		if(vcode.equalsIgnoreCase(valVCode)) {
-			result = 1;
+			result = "1";
 		}else{
-			result=0;
+			result = "0";
 		}
-		writer.print(result);
+		writer.write(result);
 	}
 	
 	
@@ -120,7 +128,6 @@ public class UserController {
 	 */
 	@RequestMapping(value="/valName",method=RequestMethod.POST)
 	public void validateName(@RequestParam("username")String name,PrintWriter writer) {
-		System.out.println("请求进入了验证");
 		int result = 0;
 		if(name.matches("^(\\w)+(\\.\\w+)*@(\\w)+((\\.\\w+)+)$")) {
 			//邮箱登录
@@ -132,8 +139,7 @@ public class UserController {
 			//用户名登录
 			result = userService.validateUserName(name);
 		}
-		writer.print(result);
-		System.out.println(result);
+		writer.print(result + "");
 	}
 	
 	
@@ -145,17 +151,18 @@ public class UserController {
 	@RequestMapping(value="/sendPCode", method=RequestMethod.POST)
 	public void sendPhoneCode(@RequestParam(value="phone")String phone,
 			@RequestParam("random")String random, PrintWriter writer) {
-		
-		System.out.println(phone);
 		String code = UUID.randomUUID().toString().
-				replace("-", "").substring(0, 6);
-		System.out.println(code);
+				replace("-", "").substring(0, 4);
 		try {
-			IndustrySMS.execute(phone, code);
-			writer.print(dao.savePCode(random, code));//将验证码存储到redis缓存当中
+			if(userService.selectUserByPhone(phone) != null) {
+				IndustrySMS.execute(phone, code);
+				writer.write(dao.savePCode(random, code) + "");//将验证码存储到redis缓存当中
+			} else {
+				writer.write("0");
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			writer.print(0);
+			writer.write("0");
 		}
 	}
 	
@@ -174,7 +181,7 @@ public class UserController {
 		}else {
 			result = userService.validateUserPhone(phone);
 		}
-		writer.print(result);
+		writer.write(result + "");
 	}
 	
 	/**
@@ -190,7 +197,7 @@ public class UserController {
 		}else {
 			result = 0;
 		}
-		writer.write(result);
+		writer.write(result + "");
 	}
 
 	/**
@@ -205,17 +212,17 @@ public class UserController {
 	public void regist(User u, @RequestParam("random")String random,
 			@RequestParam("vcode")String vcode,@RequestParam("pcode")String pcode,
 			PrintWriter writer) {
-		if(!(vcode.equals(dao.selectVCode(random)))) {
-			writer.write(0);
-		}else if(!pcode.equals(dao.selectPCode(random))) {
-			writer.write(0);
+		if(!(vcode != null && vcode.equals(dao.selectVCode(random)))) {
+			writer.write("0");
+		}else if(pcode != null && !pcode.equals(dao.selectPCode(random))) {
+			writer.write("0");
 		}else if(userService.validateUserName(u.getUsername())==1 ||
 				userService.validateUserEmail(u.getEmail())==1 || 
 				userService.validateUserPhone(u.getPhone())==1) {
-			writer.write(0);
+			writer.write("0");
 		}else {
 			int result = userService.saveUser(u);
-			writer.write(result);
+			writer.write(result + "");
 		}
 	}
 	
@@ -239,13 +246,13 @@ public class UserController {
 				if(userService.updateUserPassword(u) > 0) {
 					writer.write("1");
 				} else {
-					writer.write(0);
+					writer.write("0");
 				}
 			} else {
-				writer.write(0);
+				writer.write("0");
 			}
 		} else {
-			writer.write(0);
+			writer.write("0");
 		}
 	}
 	
@@ -263,7 +270,7 @@ public class UserController {
 		if(pcode.equals(reVCode)) {
 			writer.write("1");
 		}else {
-			writer.write(0);
+			writer.write("0");
 		}
 	}
 	
