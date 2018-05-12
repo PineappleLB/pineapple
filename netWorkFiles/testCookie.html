@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>testCookie</title>
+	</head>
+	<body>
+		
+	</body>
+	<script type="text/javascript" src="static/js/jquery-2.1.0.js" ></script>
+	<script type="text/javascript" src="static/js/jquery.cookie.js" ></script>
+	<script>
+		$.cookie('the_cookie', 'the_value',{expires:7});　
+		var c = $.cookie('the_cookie');
+		alert(c);
+	</script>
+</html>

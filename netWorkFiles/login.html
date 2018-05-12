@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no,maximum-scale=1.0, minimum-scale=1.0" />
+		<meta charset="utf-8" />
+		<title>菠萝云盘登录</title>
+		<link rel="stylesheet" href="static/css/bootstrap.css" />
+		<style>
+			#app{
+				width: 300px;
+				margin: 5px auto;
+				border: 1px solid black;
+			}
+			#app h2{
+				text-align: center;
+			}
+			#app div{
+				margin: 10px 0;
+			}
+			#app div label{
+				display: inline-block;
+				width: 70px;
+				text-align: right;
+			}
+			#app form div:last-child{
+				text-align: center;
+			}
+			#app form div:last-child input{
+				width: 100px;
+			}
+			#linked #link_list{
+				margin: 0;
+				padding: 0;
+				list-style:none;
+				position: relative;
+				height: 30px;
+				width: 245px;
+				margin-left: 55px;
+			}
+			#linked #link_list li{
+				float:left;
+				text-align: center;
+				display: inline-block;
+				width: 80px;
+				border-left:1px solid black;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			<h2>应用登录</h2>
+			<form>
+				<div>
+					<label for="name">用户名：</label>
+					<input id="name" v-model="name" type="text" placeholder="请输入用户名/手机号/邮箱"  />
+					<div class="errormsg" v-bind="nameError"></div>
+				</div>
+				<div>
+					<label for="pass">密码：</label>
+					<input id="pass" v-model="pass" type="password" placeholder="请输入密码"  />
+					<div class="errormsg" v-bind="passError"></div>
+				</div>
+				<div>
+					<input id="submit" @click="loginSubmit" type="button" value="登录"  />
+				</div>
+			</form>
+			<div id="linked">
+				<ul id="link_list">
+					<li><a href="findPass.html">忘记密码</a></li>
+					<li><a href="phoneLogin.html">手机号登录</a></li>
+					<li><a href="regist.html">账号注册</a></li>
+				</ul>
+			</div>
+		</div>
+	</body>
+	<script src="static/js/jquery-3.2.1.js"></script>
+	<script src="static/js/bootstrap.js"></script>
+	<script src="static/js/vue.js"></script>
+	<script>
+		var app = new Vue({
+			el:'#app',
+			data:{
+				name:'',
+				pass:'',
+				nameError:'',
+				passError:''
+			},
+			methods:{
+				loginSubmit:function(){
+					$.ajax({
+						type:'post',
+						url:'localhost:8080/ssm/user/login',
+						data:{
+							name:this.name,
+							pass:this.pass,
+						},
+						success:function(resp){
+							if(resp==1){
+								window.location.href="home.html";
+							}
+						},
+						error:function(){
+							alert('登录失败，用户名或密码错误！');
+						}
+					});
+				}
+			}
+		});
+		
+	</script>
+</html>

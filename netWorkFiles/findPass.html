@@ -136,9 +136,10 @@
 				},
 				/*提交修改密码*/
 				findPassSubmit:function(){
-					if(this.nameReady && this.phoneReady && vcodeReady && pcodeReady && newPassReady && rePassReady){
+					if(this.nameReady && this.phoneReady && this.vcodeReady && this.pcodeReady 
+						&& this.newPassReady && this.rePassReady){
 						$.ajax({
-							url:'http://localhost:8080/ssm/user/updatePass',
+							url:'http://localhost:8080/ssm/user/updPass',
 							type:'post',
 							data:{
 								username:this.name,
@@ -196,7 +197,8 @@
 						this.pcodeError="";
 					}
 					this.sendAjax({
-						pcode:this.pcode
+						pcode:this.pcode,
+						random:this.sessionRandom
 					}, this.pcodeError,'valPCode','手机验证码错误！','pcodeReady');
 				},
 				/*切换图片验证码*/
@@ -275,7 +277,8 @@
 								app[ready]=true;
 								console.log(app[ready]);
 							}
-							console.log("name:"+app.nameReady+",phone:"+app.phoneReady+",vcode:"+app.vcodeReady);
+							console.log("name:"+app.nameReady+",phone:"+app.phoneReady+",vcode:"+app.vcodeReady+
+							",pcode"+app.pcodeReady+",newPass" + app.newPassReady + ",rePass" + app.rePassReady);
 						},
 						error:function(resp){
 							console.log(resp);

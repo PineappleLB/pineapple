@@ -3,80 +3,133 @@
 	<head>
 		<meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no,maximum-scale=1.0, minimum-scale=1.0" />
 		<meta charset="utf-8" />
-		<title>菠萝云盘登录</title>
+		<title>菠萝云盘</title>
 		<link rel="stylesheet" href="static/css/bootstrap.css" />
 		<style>
 			#app{
-				width: 300px;
+				/*width: 300px;*/
 				margin: 5px auto;
 				border: 1px solid black;
 			}
 			#app h2{
 				text-align: center;
 			}
-			#app div{
-				margin: 10px 0;
+			#app #head{
+				border-bottom: 1px black solid;
 			}
-			#app div label{
-				display: inline-block;
-				width: 70px;
-				text-align: right;
-			}
-			#app form div:last-child{
-				text-align: center;
-			}
-			#app form div:last-child input{
-				width: 100px;
-			}
-			#linked #link_list{
-				margin: 0;
-				padding: 0;
-				list-style:none;
-				position: relative;
-				height: 30px;
-				width: 245px;
-				margin-left: 55px;
-			}
-			#linked #link_list li{
-				float:left;
+			#leftCtrl{
+				/*width: 200px;*/
 				text-align: center;
 				display: inline-block;
-				width: 80px;
-				border-left:1px solid black;
+				border-right: 1px solid black;
+			}
+			#rightView{
+				display: inline-block;
+			}
+			#rightView #topCtrl{
+				border-bottom: 1px black solid;
+			}
+			#rightView #fileList #fileIndex table th{
+				text-align: center;
 			}
 		</style>
 	</head>
-	<body>
+	<body> 
 		<div id="app">
-			<h2>应用登录</h2>
-			<form>
-				<div>
-					<label for="name">用户名：</label>
-					<input id="name" v-model="name" type="text" placeholder="请输入用户名/手机号/邮箱"  />
-					<div class="errormsg" v-bind="nameError"></div>
-				</div>
-				<div>
-					<label for="pass">密码：</label>
-					<input id="pass" v-model="pass" type="password" placeholder="请输入密码"  />
-					<div class="errormsg" v-bind="passError"></div>
-				</div>
-				<div>
-					<input id="submit" @click="loginSubmit" type="button" value="登录"  />
-				</div>
-			</form>
-			<div id="linked">
-				<ul id="link_list">
-					<li><a href="findPass.html">忘记密码</a></li>
-					<li><a href="phoneLogin.html">手机号登录</a></li>
-					<li><a href="regist.html">账号注册</a></li>
-				</ul>
+			<div id="head">
+				<h2>菠萝云盘</h2>
 			</div>
+			<div id="body" class="">
+				<div id="body-row" class=" row">
+					<div id="leftCtrl" class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+						<ul class="nav nav-pills nav-stacked">
+							<li class=""><a>图片</a></li>
+							<li class=""><a>音乐</a></li>
+							<li class=""><a>文档</a></li>
+							<li class=""><a>压缩包</a></li>
+							<li class=""><a>视频</a></li>
+							<li class=""><a>其他</a></li>
+							<li class=""><a>回收站</a></li>
+						</ul>
+					</div>
+					<div id="rightView" class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+						<div id="topCtrl" class="row">
+							<div id="" class="">
+								<ul class="nav nav-pills nav-justified hidden-xs">
+									<li class=""><a>上传</a></li>
+									<li class=""><a>下载</a></li>
+									<li class=""><a>新建文件夹</a></li>
+									<li class=""><a>分享</a></li>
+									<li class=""><a>文件分享</a></li>
+								</ul>
+								<div class="xs-model visible-xs">
+									<nav class="navbar navbar-default" role="navigation">
+										<div class="navbar-header">
+											<button type="button" class="navbar-toggle" data-toggle="collapse"
+													data-target="#example-navbar-collapse">
+												<span class="sr-only">切换导航</span>
+												<span class="icon-bar"></span>
+												<span class="icon-bar"></span>
+												<span class="icon-bar"></span>
+											</button>
+											<a class="navbar-brand" href="#">功能</a>
+										</div>
+										<div id="example-navbar-collapse" class="collapse navbar-collapse">
+											<ul class="nav navbar-nav">
+												<li class=""><a>上传</a></li>
+												<li class=""><a>下载</a></li>
+												<li class=""><a>新建文件夹</a></li>
+												<li class=""><a>分享</a></li>
+												<li class=""><a>文件分享</a></li>
+											</ul>
+										</div>
+									</nav>
+								</div>
+							</div>
+						</div>
+						<div id="fileList">
+							<div id="fileIndex" class="row">
+								<ul class="nav nav-tabs">
+									<li><a>首页></a></li>
+									<li class="active"><a>我的网盘</a></li>
+								</ul>
+								<table class="table table-striped text-center">
+									<thead>
+										<tr>
+											<th>文件名</th>
+											<th>文件大小</th>
+											<th>修改时间</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>a.txt</td>
+											<td>1kb</td>
+											<td>2018-5-2 10:10</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>			
 		</div>
 	</body>
 	<script src="static/js/jquery-3.2.1.js"></script>
 	<script src="static/js/bootstrap.js"></script>
 	<script src="static/js/vue.js"></script>
+	<script src="static/js/jquery.cookie.js" /></script>
 	<script>
+		$(function(){
+			var user = $.cookie("club.pinea_USER");
+			console.log(user);
+			if(user){
+//				alert(1);
+			} else {
+//				alert(2);
+			}
+		});
 		var app = new Vue({
 			el:'#app',
 			data:{
@@ -85,17 +138,20 @@
 				nameError:'',
 				passError:''
 			},
+			
 			methods:{
 				loginSubmit:function(){
 					$.ajax({
 						type:'post',
-						url:'localhost:8080/ssm/user/login',
+						url:'http://localhost:8080/ssm/user/login',
 						data:{
 							name:this.name,
-							pass:this.pass,
+							pass:this.pass
 						},
 						success:function(resp){
 							if(resp==1){
+//								$.cookie('club.pinea_USER', '123',{expires:7});
+								alert($.cookie("club.pinea_USER"));
 								window.location.href="home.html";
 							}
 						},
@@ -106,6 +162,7 @@
 				}
 			}
 		});
+		
 		
 	</script>
 </html>
