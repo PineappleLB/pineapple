@@ -37,7 +37,7 @@ public class RedisTemplate {
 			return callback.handle(jedis);
 		} catch (Exception e) {
 			// throw your exception
-			throw e;
+			throw new IllegalArgumentException(e);
 		} finally {
 			returnResource(jedis);
 		}
@@ -49,7 +49,7 @@ public class RedisTemplate {
 		try {
 			update.update(jedis);
 		} catch (Exception e) {
-			throw e;
+			throw new IllegalArgumentException(e);
 		} finally {
 			returnResource(jedis);
 		}

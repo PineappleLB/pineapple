@@ -56,47 +56,46 @@ public class Config
 	
 	static {
 		props = new Properties();
-		try {
-			String str = null;
-			props.load(new FileInputStream("classpath:applicationConfig.properties"));
-			if(!props.isEmpty()) {
-				str = props.getProperty("SMS_BASE_URL");
-				if(str != null && str.length() > 0) {
-					BASE_URL = str;
-				}
-				str = props.getProperty("SMS_ACCOUNT_SID");
-				if(str != null && str.length() > 0) {
-					ACCOUNT_SID = str;
-				}
-				str = props.getProperty("SMS_AUTH_TOKEN");
-				if(str != null && str.length() > 0) {
-					AUTH_TOKEN = str;
-				}
-				str = props.getProperty("SMS_RESP_DATA_TYPE");
-				if(str != null && str.length() > 0) {
-					RESP_DATA_TYPE = str;
-				}
-				str = props.getProperty("SMS_TIME_OUT");
-				if(str != null && str.length() > 0) {
-					TIME_OUT = Integer.parseInt(str);
-				}
-				str = props.getProperty("LOGIN_USER_INFO_KEY_PREV");
-				if(str != null && str.length() > 0) {
-					LOGIN_USER_INFO_KEY_PREV = str;
-				}
-				str = props.getProperty("PHONE_CODE_INFO_KEY_PREV");
-				if(str != null && str.length() > 0) {
-					PHONE_CODE_INFO_KEY_PREV = str;
-				}
-				str = props.getProperty("PIC_CODE_INFO_KEY_PREV");
-				if(str != null && str.length() > 0) {
-					PIC_CODE_INFO_KEY_PREV = str;
-				}
-			}
-			
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+//		try {
+//			String str = null;
+//			props.load(new FileInputStream("classpath:applicationConfig.properties"));
+//			if(!props.isEmpty()) {
+//				str = props.getProperty("SMS_BASE_URL");
+//				if(str != null && str.length() > 0) {
+//					BASE_URL = str;
+//				}
+//				str = props.getProperty("SMS_ACCOUNT_SID");
+//				if(str != null && str.length() > 0) {
+//					ACCOUNT_SID = str;
+//				}
+//				str = props.getProperty("SMS_AUTH_TOKEN");
+//				if(str != null && str.length() > 0) {
+//					AUTH_TOKEN = str;
+//				}
+//				str = props.getProperty("SMS_RESP_DATA_TYPE");
+//				if(str != null && str.length() > 0) {
+//					RESP_DATA_TYPE = str;
+//				}
+//				str = props.getProperty("SMS_TIME_OUT");
+//				if(str != null && str.length() > 0) {
+//					TIME_OUT = Integer.parseInt(str);
+//				}
+//				str = props.getProperty("LOGIN_USER_INFO_KEY_PREV");
+//				if(str != null && str.length() > 0) {
+//					LOGIN_USER_INFO_KEY_PREV = str;
+//				}
+//				str = props.getProperty("PHONE_CODE_INFO_KEY_PREV");
+//				if(str != null && str.length() > 0) {
+//					PHONE_CODE_INFO_KEY_PREV = str;
+//				}
+//				str = props.getProperty("PIC_CODE_INFO_KEY_PREV");
+//				if(str != null && str.length() > 0) {
+//					PIC_CODE_INFO_KEY_PREV = str;
+//				}
+//			}
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
 		
 	}
 	

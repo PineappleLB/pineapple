@@ -94,6 +94,7 @@ public class VerifyCode {
 				throws IOException {
 		ImageIO.write(image, "JPEG", out);
 	}
+
 }
 
 

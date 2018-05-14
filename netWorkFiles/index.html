@@ -53,16 +53,14 @@
 			}
 		</style>
 	</head>
-	<body> 
+	<body>
 		<div id="app">
 			<div id="head" class="row">
 				<div id="sysLogo" class="col-lg-6 col-md-6 col-sm-6 col-xs-10"><h2>菠萝云盘</h2></div>
 				<div id="usrInfo" class="col-lg-6 col-md-6 col-sm-6 col-xs-2">
 					<ul class="nav navbar-nav pull-right hidden-xs">
 						<li>
-						<a class="dropdown-toggle" data-toggle="dropdown" href="#">
-							菠萝<span class="caret"></span>
-						</a>
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#" v-html="name"></a>
 						<ul class="dropdown-menu">
 							<li><a href="#">退出</a></li>
 						</ul>
@@ -190,15 +188,17 @@
 	<script src="static/js/bootstrap.js"></script>
 	<script src="static/js/vue.js"></script>
 	<script src="static/js/jquery.cookie.js" /></script>
+	<script src="static/js/uuid.js"></script>
 	<script>
 		$(function(){
 			var user = $.cookie("club.pinea_USER");
 			console.log(user);
 			if(user){
-//				alert(1);
+				app.name=user;
 			} else {
-//				alert(2);
+				app.name='菠萝';
 			}
+			
 		});
 		var app = new Vue({
 			el:'#app',
@@ -206,9 +206,9 @@
 				name:'',
 				pass:'',
 				nameError:'',
-				passError:''
+				passError:'',
+				sessionRandom:uuid(16, 16)
 			},
-			
 			methods:{
 				loginSubmit:function(){
 					$.ajax({
@@ -230,6 +230,9 @@
 						}
 					});
 				}
+			},
+			created: function () {
+				alert(this.sessionRandom);
 			}
 		});
 		
