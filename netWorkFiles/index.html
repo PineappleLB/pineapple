@@ -11,8 +11,18 @@
 				margin: 5px auto;
 				border: 1px solid black;
 			}
+			#app #head{
+				margin: 0;
+			}
+			#app #head #usrInfo li{
+				cursor: pointer;
+			}
 			#app h2{
 				text-align: center;
+			}
+			#app #body-row{
+				margin: 0;
+				padding: 0;
 			}
 			#app #head{
 				border-bottom: 1px black solid;
@@ -21,23 +31,58 @@
 				/*width: 200px;*/
 				text-align: center;
 				display: inline-block;
-				border-right: 1px solid black;
+				margin: 0;
+				padding: 0;
 			}
 			#rightView{
 				display: inline-block;
+				border-left: 1px solid black;
+				margin: 0;
+				padding: 0;
 			}
 			#rightView #topCtrl{
 				border-bottom: 1px black solid;
+				margin: 0;
+				padding: 0;
 			}
 			#rightView #fileList #fileIndex table th{
 				text-align: center;
+			}
+			#rightView #fileList #fileIndex{
+				margin: 0;
 			}
 		</style>
 	</head>
 	<body> 
 		<div id="app">
-			<div id="head">
-				<h2>菠萝云盘</h2>
+			<div id="head" class="row">
+				<div id="sysLogo" class="col-lg-6 col-md-6 col-sm-6 col-xs-10"><h2>菠萝云盘</h2></div>
+				<div id="usrInfo" class="col-lg-6 col-md-6 col-sm-6 col-xs-2">
+					<ul class="nav navbar-nav pull-right hidden-xs">
+						<li>
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+							菠萝<span class="caret"></span>
+						</a>
+						<ul class="dropdown-menu">
+							<li><a href="#">退出</a></li>
+						</ul>
+						</li>
+						<li><a><i class="glyphicon glyphicon glyphicon-envelope" title="消息"></i></a></li>
+						<li><a><i class="glyphicon glyphicon glyphicon-list-alt" title="意见反馈"></i></a></li>
+					</ul>
+					<ul class="nav navbar-nav visible-xs">
+						<li>
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+							<i class="glyphicon glyphicon-user"></i><span class="caret"></span>
+						</a>
+						<ul class="dropdown-menu">
+							<li><a href="#">消息</a></li>
+							<li><a href="#">意见反馈</a></li>
+							<li><a href="#">退出</a></li>
+						</ul>
+						</li>
+					</ul>
+				</div>
 			</div>
 			<div id="body" class="">
 				<div id="body-row" class=" row">
@@ -89,23 +134,48 @@
 						</div>
 						<div id="fileList">
 							<div id="fileIndex" class="row">
-								<ul class="nav nav-tabs">
+								<ul class="breadcrumb">
 									<li><a>首页></a></li>
-									<li class="active"><a>我的网盘</a></li>
+									<li class="active">我的网盘</li>
 								</ul>
-								<table class="table table-striped text-center">
+								<table class="table table-striped text-center" style="table-layout: fixed;">
 									<thead>
 										<tr>
-											<th>文件名</th>
-											<th>文件大小</th>
-											<th>修改时间</th>
+											<th style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">文件名</th>
+											<th style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">文件大小</th>
+											<th style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">修改时间</th>
 										</tr>
 									</thead>
 									<tbody>
 										<tr>
-											<td>a.txt</td>
-											<td>1kb</td>
-											<td>2018-5-2 10:10</td>
+											<td style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">a.txt</td>
+											<td style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">1kb</td>
+											<td style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">2018-5-2 10:10</td>
+										</tr>
+										<tr>
+											<td style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">a.txt</td>
+											<td style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">1kb</td>
+											<td style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">2018-5-2 10:10</td>
+										</tr>
+										<tr>
+											<td style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">a.txt</td>
+											<td style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">1kb</td>
+											<td style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">2018-5-2 10:10</td>
+										</tr>
+										<tr>
+											<td style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">a.txt</td>
+											<td style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">1kb</td>
+											<td style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">2018-5-2 10:10</td>
+										</tr>
+										<tr>
+											<td style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">a.txt</td>
+											<td style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">1kb</td>
+											<td style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">2018-5-2 10:10</td>
+										</tr>
+										<tr>
+											<td style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">a.txt</td>
+											<td style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">1kb</td>
+											<td style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">2018-5-2 10:10</td>
 										</tr>
 									</tbody>
 								</table>
