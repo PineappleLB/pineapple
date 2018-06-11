@@ -22,7 +22,6 @@ import redis.clients.jedis.JedisCluster;
 @Controller
 @ComponentScan(basePackages = "club.pinea") //配置扫描包
 @MapperScan("club.pinea.dao")
-//@PropertySource(value= {"classpath:static/jdbc.properties", "classpath:static/redis.properties"})
 public class PineappleNetWorkFileApplication {
 
 	@Value("${spring.redis.cluster.nodes}")

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>ETH后台管理系统</title>
+		<link rel="stylesheet" href="css/bootstrap.css" />
+		<link rel="stylesheet" href="css/iconfont.css" />
+		<link rel="stylesheet" href="css/index/index.css" />
+	</head>
+	<body>
+		<div id="app">
+			<!--顶部导航部分-->
+			<div id="content-title" class="">
+				<div class="col-lg-2" align="center">
+					<img src="img/u25.png" height="50"/>
+				</div>
+				
+				<div class="col-lg-10">
+					<ul class="list-none">
+						<li class="">欢迎您,
+							<span style="text-decoration: underline;">pineapple</span>【超级管理员】</li>
+						<li class=""><a href="#">未处理反馈：<span>1 </span>条</a></li>
+					</ul>
+					<ul class="list-none">
+						<li class=""><a href="#">后台首页</a></li>
+						<li class=""><a href="#">安全退出</a></li>
+						<li class=""><a href="#">绑定机器码</a></li>
+					</ul>
+				</div>
+			</div>
+			<!--下方内容与左边导航栏部分-->
+			<div id="content" class="">
+				<!--左边导航栏-->
+				<div id="left-ctrl" class="col-lg-2">
+					<ul>
+						<!--数据统计-->
+						<li class="nav-li">
+							<a data-toggle="collapse" data-parent="left-ctrl" href="#data-statistics" class="nav-a">
+							<i class="iconfont icon-icon-arrow-right"></i>
+							<i class="iconfont icon-icon-arrow-down active"></i> 数据统计</a>
+							<ul id="data-statistics" class="panel-collapse collapse">
+								<li class="revenue"><a href="#"><i class="iconfont"></i>营收汇总</a></li>
+								<li class="xx"><a href="#"><i class="iconfont"></i>营收分布</a></li>
+								<li class="xx"><a href="#"><i class="iconfont"></i>用户汇总</a></li>
+								<li class="xx"><a href="#"><i class="iconfont"></i>充值分析</a></li>
+								<li class="xx"><a href="#"><i class="iconfont"></i>注册分析</a></li>
+								<li class="xx"><a href="#"><i class="iconfont"></i>在线分析</a></li>
+								<li class="xx"><a href="#"><i class="iconfont"></i>流失玩家</a></li>
+								<li class="xx"><a href="#"><i class="iconfont"></i>活跃玩家</a></li>
+								<li class="xx"><a href="#"><i class="iconfont"></i>税收统计</a></li>
+							</ul>
+						</li>
+						<!--用户系统-->
+						<li class="nav-li">
+							<a data-toggle="collapse" data-parent="left-ctrl" href="#user-sys" class="nav-a">
+							<i class="iconfont icon-icon-arrow-right"></i>
+							<i class="iconfont icon-icon-arrow-down active"></i> 用户系统</a>
+							<ul id="user-sys" class="panel-collapse collapse">
+								<li class="xx"><a href="#"><i class="iconfont"></i>当前在线</a></li>
+								<li class="xx"><a href="#"><i class="iconfont"></i>游戏记录</a></li>
+								<li class="xx"><a href="#"><i class="iconfont"></i>用户管理</a></li>
+								<li class="xx"><a href="#"><i class="iconfont"></i>货币管理</a></li>
+								<li class="xx"><a href="#"><i class="iconfont"></i>银行记录</a></li>
+								<li class="xx"><a href="#"><i class="iconfont"></i>操作记录</a></li>
+								<li class="xx"><a href="#"><i class="iconfont"></i>道具记录</a></li>
+								<li class="xx"><a href="#"><i class="iconfont"></i>限制字符</a></li>
+								<li class="xx"><a href="#"><i class="iconfont"></i>限制IP地址</a></li>
+								<li class="xx"><a href="#"><i class="iconfont"></i>限制机器码</a></li>
+							</ul>
+						</li>
+						<!--充值系统-->
+						<li class="nav-li">
+							<a data-toggle="collapse" data-parent="left-ctrl" href="#recharge-sys" class="nav-a">
+							<i class="iconfont icon-icon-arrow-right"></i>
+							<i class="iconfont icon-icon-arrow-down active"></i> 充值系统</a>
+							<ul id="recharge-sys" class="panel-collapse collapse">
+								<li class="xx"><a href="#"><i class="iconfont"></i>充值记录</a></li>
+								<li class="xx"><a href="#"><i class="iconfont"></i>订单管理</a></li>
+								<li class="xx"><a href="#"><i class="iconfont"></i>充值配置</a></li>
+							</ul>
+						</li>	
+						<!--客服系统-->
+						<li class="nav-li">
+							<a data-toggle="collapse" data-parent="left-ctrl" href="#customer-service" class="nav-a">
+							<i class="iconfont icon-icon-arrow-right"></i>
+							<i class="iconfont icon-icon-arrow-down active"></i> 客服系统</a>
+							<ul id="customer-service" class="panel-collapse collapse">
+								<li class="xx"><a href="#"><i class="iconfont"></i>用户反馈</a></li>
+								<li class="xx"><a href="#"><i class="iconfont"></i>邮件系统</a></li>
+								<li class="xx"><a href="#"><i class="iconfont"></i>规则管理</a></li>
+							</ul>
+						</li>
+						<!--运维系统-->
+						<li class="nav-li">
+							<a data-toggle="collapse" data-parent="left-ctrl" href="#operation-and-maintenance-service" class="nav-a">
+							<i class="iconfont icon-icon-arrow-right"></i>
+							<i class="iconfont icon-icon-arrow-down active"></i> 运维系统</a>
+							<ul id="operation-and-maintenance-service" class="panel-collapse collapse">
+								<li class="xx"><a href="#"><i class="iconfont"></i>系统设置</a></li>
+								<li class="xx"><a href="#"><i class="iconfont"></i>系统广播</a></li>
+								<li class="xx"><a href="#"><i class="iconfont"></i>签到设置</a></li>
+								<li class="xx"><a href="#"><i class="iconfont"></i>道具管理</a></li>
+								<li class="xx"><a href="#"><i class="iconfont"></i>银行管理</a></li>
+								<li class="xx"><a href="#"><i class="iconfont"></i>税收管理</a></li>
+							</ul>
+						</li>
+						<!--任务系统-->
+						<li class="nav-li">
+							<a data-toggle="collapse" data-parent="left-ctrl" href="#task-sys" class="nav-a">
+							<i class="iconfont icon-icon-arrow-right"></i>
+							<i class="iconfont icon-icon-arrow-down active"></i> 任务系统</a>
+							<ul id="task-sys" class="panel-collapse collapse">
+								<li class="xx"><a href="#"><i class="iconfont"></i>任务管理</a></li>
+								<li class="xx"><a href="#"><i class="iconfont"></i>任务记录</a></li>
+							</ul>
+						</li>
+						<!--权限系统-->
+						<li class="nav-li">
+							<a data-toggle="collapse" data-parent="left-ctrl" href="#privilege-sys" class="nav-a">
+							<i class="iconfont icon-icon-arrow-right"></i>
+							<i class="iconfont icon-icon-arrow-down active"></i> 权限系统</a>
+							<ul id="privilege-sys" class="panel-collapse collapse">
+								<li class="xx"><a href="#"><i class="iconfont"></i>管理员配置</a></li>
+								<li class="xx"><a href="#"><i class="iconfont"></i>登录日志</a></li>
+							</ul>
+						</li>
+						<!--代理系统-->
+						<li class="nav-li">
+							<a data-toggle="collapse" data-parent="left-ctrl" href="#proxy-sys" class="nav-a">
+							<i class="iconfont icon-icon-arrow-right"></i>
+							<i class="iconfont icon-icon-arrow-down active"></i> 代理系统</a>
+							<ul id="proxy-sys" class="panel-collapse collapse">
+								<li class="xx"><a href="#"><i class="iconfont"></i>代理管理</a></li>
+								<li class="xx"><a href="#"><i class="iconfont"></i>代充流水</a></li>
+							</ul>
+						</li>
+					</ul>
+					
+				</div>
+				<!--中间内容div-->
+				<div id="content-center" class="col-lg-10">
+					<iframe src="view/online-analysis.html"  frameborder="0" scrolling="yes" width="100%" height="99%"></iframe>					
+				</div>
+			</div>
+		</div>
+		
+	</body>
+	<script type="text/javascript" src="js/jquery-2.1.0.js"></script>
+	<script type="text/javascript" src="js/bootstrap.js"></script>
+	<script type="text/javascript" src="js/iconfont.js" ></script>
+	<script>
+		$(function(){
+			var navHeight = $(window).height() - 75;
+			$('#content').height(navHeight);
+		});
+		
+		$('#left-ctrl .nav-a').click(function(){
+			var child0 = $($(this).children()[0]);
+			var child1 = $($(this).children()[1]);
+			if(child0.hasClass('active')){
+				child0.removeClass('active');
+				child1.addClass('active');
+			} else {
+				child1.removeClass('active');
+				child0.addClass('active');
+			}
+		});
+		$('.nav-li ul li').click(function(){
+			var className = $(this).attr('class');
+			console.log(className);
+			$('.nav-li ul li i').removeClass('icon-right-o');
+			$(this).children().children('i').addClass('icon-right-o');
+		});
+		
+		
+	</script>
+
+</html>

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="../../css/bootstrap.css" />
+		<style>
+			#app #head-nav {
+				height: 60px;
+				background: #ABE3FF;
+			}
+			
+			#app #head-nav ul {
+				margin: 10px auto;
+			}
+			
+			#app ul li {
+				margin: 0 10px;
+				list-style: none;
+				text-align: center;
+				margin: 5px 0;
+			}
+			
+			#app #head-nav ul li select {
+				line-height: 26px;
+				height: 26px;
+			}
+			#app #head-nav ul li{
+				margin: 0 10px;
+			}
+			
+			#content-table #user-pay-canvas {
+				width: 100%;
+				height: 400px;
+			}
+			
+			#content-table #user-pay-canvas #chartmain {
+				width: 100%;
+				height: 100%;
+			}
+			#app #user-count-info #user-count-info-title{
+				border-bottom: 3px gray solid;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="app">
+			<div id="head-nav">
+				<ul class="nav navbar-nav">
+					<li>日期时间：<input type="date" id="date-prev" /> </li>
+					<li>至：<input type="date" id="date-suff" /> </li>
+					<li>
+						<select id="table-type-sel">
+							<option value="optionLine">曲线图</option>
+							<option value="optionBar">树状图</option>
+							<option value="optionPie">饼图</option>
+							<!--<option value="ddz3">斗地主高级场</option>
+							<option value="ddz4">斗地主大师场</option>
+							<option value="brnn">百人牛牛</option>-->
+						</select>
+					</li>
+					<li><button class="btn btn-primary">查询</button></li>
+					<!--<li><button class="btn btn-primary">统计</button></li>-->
+					<li><button class="btn btn-primary">最近30天</button></li>
+					<li><button class="btn btn-primary">刷新</button></li>
+				</ul>
+			</div>
+			<div id="content-table">
+				<div id="user-pay-canvas" class="container">
+					<div id="chartmain"></div>
+				</div>
+				<div id="user-count-info">
+					<div id="user-count-info-title" class="container">
+						<h3>数据分析</h3>
+					</div>
+					<div id="user-count-info-content">
+						<div class="col-lg-2"></div>
+						<div class="col-lg-4" id="user-count-info-left">
+							<ul>
+								<li>当月注册总人数：8888</li>
+								<li>单日注册用户最高：800</li>
+							</ul>
+						</div>
+						<div class="col-lg-4" id="user-count-info-right">
+							<ul>
+								<li>注册用户总数：810000</li>
+								<li>用户增长速率：     0.2% （当月新增用户数/总用户数）</li>
+							</ul>
+						</div>
+						<div class="col-lg-2"></div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+	</body>
+	<script type="text/javascript" src="../../js/jquery-2.1.0.js"></script>
+	<script type="text/javascript" src="../../js/bootstrap.js"></script>
+	<script type="text/javascript" src="../../js/echarts-all.js"></script>
+	<script>
+		//指定图标的配置和数据
+		//折线图配置
+		var optionLine = {
+			title: {
+				text: '注册统计图'
+			},
+			tooltip: {
+
+			},
+			legend: {
+				data: ['用户来源']
+			},
+			xAxis: {
+				data: ["2018-6-1", "2018-6-2", "2018-6-3", "2018-6-4", "2018-6-5", "2018-6-6"]
+			},
+			yAxis: {
+				type: 'value',
+				axisLabel: {
+					formatter: '{value} 人'
+				}
+			},
+			series: [{
+				name: '访问量',
+				type: 'line',
+				data: [80, 33, 75, 22, 10, 8]
+			}]
+		};
+		//条形图配置
+		var optionBar = {
+			title: {
+				text: '注册统计图'
+			},
+			tooltip: {
+
+			},
+			legend: {
+				data: ['用户来源']
+			},
+			xAxis: {
+				data: ["2018-6-1", "2018-6-2", "2018-6-3", "2018-6-4", "2018-6-5", "2018-6-6"]
+			},
+			yAxis: {
+				type: 'value',
+				axisLabel: {
+					formatter: '{value} 人'
+				}
+			},
+			series: [{
+				name: '访问量',
+				type: 'bar',
+				data: [80, 33, 75, 22, 10, 8]
+			}]
+		};
+		//饼图配置
+		var optionPie = {
+			title: {
+				text: '注册统计图'
+			},
+			legend: {
+				orient: 'vertical',
+				x: 'right',
+				data: ['2018-6-1', '2018-6-2', '2018-6-3', '2018-6-4', '2018-6-5', '2018-6-6']
+			},
+			series: [{
+				name: '访问量',
+				type: 'pie',
+				radius: '60%',
+				data: [{
+						value: 80,
+						name: '2018-6-1'
+					},
+					{
+						value: 33,
+						name: '2018-6-2'
+					},
+					{
+						value: 75,
+						name: '2018-6-3'
+					},
+					{
+						value: 22,
+						name: '2018-6-4'
+					},
+					{
+						value: 10,
+						name: '2018-6-5'
+					},
+					{
+						value: 8,
+						name: '2018-6-6'
+					}
+				]
+			}]
+		};
+		//初始化echarts实例
+		var myChart = echarts.init($('#chartmain')[0]);
+		//使用制定的配置项和数据显示图表
+		$(function() {
+			myChart.setOption(optionBar);
+		});
+
+		$('#table-type-sel').change(function() {
+			var className = $(this).val();
+			if(className) {
+				myChart.clear();
+				if(className == "optionLine") {
+					myChart.setOption(optionLine);
+				} else if(className == "optionBar") {
+					myChart.setOption(optionBar);
+				} else if(className == "optionPie") {
+					myChart.setOption(optionPie);
+				}
+			}
+		});
+	</script>
+
+</html>

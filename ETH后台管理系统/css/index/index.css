@@ -1,0 +1,101 @@
+body {
+	margin: 0;
+	padding: 0;
+}
+
+#app #content-title {
+	height: 75px;
+	background: #339999;
+}
+
+#app #content-title div {
+	display: inline-block;
+	color: white;
+}
+
+#app #content-title div:first {
+	line-height: 75px;
+}
+
+#app #content-title div ul {
+	height: 28px;
+	margin: 0;
+	padding: 0;
+	/*display: inline-block;*/
+}
+
+#app #content-title div ul li {
+	float: left;
+}
+
+#app #content-title div span {
+	color: red;
+}
+
+#app #content-title div a {
+	color: white;
+	text-decoration: none;
+}
+
+#app #content-title div .list-none {
+	list-style: none;
+}
+
+#app #content-title div .list-none li {
+	margin-right: 20px;
+}
+
+#app #content-title div ul:last-child a {
+	text-decoration: underline;
+}
+
+#content {
+	height: 899px;
+}
+
+#left-ctrl {
+	background: #339999;
+	height: 100%;
+	overflow: auto;
+}
+
+#left-ctrl ul li,
+#left-ctrl ul li a,
+#left-ctrl ul li a:hover {
+	color: white;
+	text-decoration: none;
+}
+
+#left-ctrl ul li a {
+	display: inline-block;
+	width: 100%;
+}
+
+#left-ctrl ul li {
+	list-style: none;
+	line-height: 30px;
+	font-size: 18px;
+	text-align: center;
+}
+
+#left-ctrl ul li ul li {
+	font-size: 15px;
+}
+#left-ctrl ul li ul li a i{
+	font-size: 18px;
+	color: red;
+}
+#app #content #content-center {
+	background: white;
+	height: 100%;
+	padding: 0;
+}
+
+.active {
+	display: none;
+}
+
+iframe {
+	margin: 0;
+	padding: 0;
+}
